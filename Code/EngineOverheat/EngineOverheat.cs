@@ -21,6 +21,12 @@ namespace EngineOverheat
         private void EngineOverheat_Tick( object sender, EventArgs e )
         {
             this._engineController.Tick();
+            var engine = this._engineController.EngineForCurrentVehicle();
+            if ( engine == null )
+            {
+                return;
+            }
+            GUI.DrawTempGauge( engine.Temperature );
         }
     }
 }

@@ -16,6 +16,12 @@ namespace EngineOverheat
             this._engineCollection = new EngineCollection( maxSize );
         }
 
+        public Engine EngineForCurrentVehicle()
+        {
+            var currVeh = Game.Player.Character.CurrentVehicle;
+            return currVeh == null ? null : this._engineCollection.GetEngine( currVeh );
+        }
+
         public void Tick()
         {
             var player = Game.Player;
