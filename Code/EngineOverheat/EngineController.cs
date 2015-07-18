@@ -39,7 +39,7 @@ namespace EngineOverheat
                     engine.Temperature += 0.03f * rpm;
                 }
 
-                if ( engine.Temperature > 50 || !veh.EngineRunning )
+                if ( engine.Temperature > 30 || !veh.EngineRunning )
                 {
                     engine.Temperature -= 0.03f * 0.6f;
                 }
@@ -50,7 +50,7 @@ namespace EngineOverheat
 
                 if ( engine.Damage > 0 || veh.EngineHealth < 1000 )
                 {
-                    float val = ( ( veh.EngineRunning ? engine.Temperature : 50 ) / 100 + rpm ) * 0.07f;
+                    float val = ( ( veh.EngineRunning ? engine.Temperature : 30 ) / 100 + rpm ) * 0.07f;
                     engine.Damage -= val;
                     if ( veh.EngineHealth < 1000 )
                     {
