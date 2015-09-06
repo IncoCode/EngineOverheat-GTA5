@@ -8,8 +8,8 @@ This mod adds a little bit realism in GTA 5. When you push your car too hard and
 Requirements 
 --------------
 
-- Microsoft [.NET Framework ≥ 4.5.2](https://www.microsoft.com/download/details.aspx?id=30653);
-- Microsoft [Visual C++ Redistributable for Visual Studio 2015  (x64)](https://www.microsoft.com/download/details.aspx?id=48145);
+- [Microsoft .NET Framework ≥ 4.5.2](https://www.microsoft.com/download/details.aspx?id=30653);
+- [Microsoft Visual C++ Redistributable for Visual Studio 2015  (x64)](https://www.microsoft.com/download/details.aspx?id=48145);
 - [Script Hook V](http://gtaforums.com/topic/788343-script-hook-v/);
 - [Community Script Hook V .NET v2.0](https://github.com/crosire/scripthookvdotnet/releases/tag/v2.0).
 
