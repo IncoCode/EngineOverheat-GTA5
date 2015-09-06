@@ -1,4 +1,5 @@
 # EngineOverheat-GTA5
+[![Build status](https://ci.appveyor.com/api/projects/status/c5isoly36gap2jea/branch/master?svg=true)](https://ci.appveyor.com/project/IncoCode/engineoverheat-gta5/branch/master)
 
 <img src="img/poster.jpg" alt="alt text" width="650" height="520">
 
