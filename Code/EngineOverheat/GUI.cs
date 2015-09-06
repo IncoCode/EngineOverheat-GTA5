@@ -7,39 +7,46 @@ using GTA.Native;
 
 namespace EngineOverheat
 {
-    internal static class GUI
+    internal class GUI
     {
-        public static float GaugePosX = 0.125f;
-        public static float GaugePosY = 0.78f;
-        public static float GaugeWidth = 0.15f;
-        public static float GaugeHeight = 0.01f;
+        private readonly MySettings _settings;
 
-        public static Color BackgroundColor = Color.FromArgb( 255, 255, 255 );
+        #region Fields
 
-        private static float GetX( float width )
+        public Color BackgroundColor = Color.FromArgb( 255, 255, 255 );
+
+        #endregion
+
+        public GUI( MySettings settings )
         {
-            float maxX = GaugePosX * 2;
-            return ( maxX / 2f - GaugeWidth / 2f ) + ( width / 2 );
+            this._settings = settings;
         }
 
-        private static Color ColorForPercent( float percent )
+        private float GetX( float width )
+        {
+            float maxX = this._settings.GaugePosX * 2;
+            return ( maxX / 2f - this._settings.GaugeWidth / 2f ) + ( width / 2 );
+        }
+
+        private Color ColorForPercent( float percent )
         {
             return percent < 0.5
                 ? Color.FromArgb( (int)( 255 * percent * 2 ), 255, 0 )
                 : Color.FromArgb( 255, (int)( 255 - 255 * ( ( percent - 0.5 ) * 2 ) ), 0 );
         }
 
-        public static void DrawTempGauge( float temperature )
+        public void DrawTempGauge( float temperature )
         {
-            float width = GaugeWidth / 100 * temperature;
+            float width = this._settings.GaugeWidth / 100 * temperature;
 
             // draws background gauge
-            Function.Call( Hash.DRAW_RECT, GaugePosX, GaugePosY, GaugeWidth, GaugeHeight, BackgroundColor.R,
-                BackgroundColor.G, BackgroundColor.B, 100 );
+            Function.Call( Hash.DRAW_RECT, this._settings.GaugePosX, this._settings.GaugePosY, this._settings.GaugeWidth,
+                this._settings.GaugeHeight, this.BackgroundColor.R, this.BackgroundColor.G, this.BackgroundColor.B, 100 );
 
-            Color color = ColorForPercent( temperature / 100 );
+            Color color = this.ColorForPercent( temperature / 100 );
             // draws temperature gauge
-            Function.Call( Hash.DRAW_RECT, GetX( width ), GaugePosY, width, GaugeHeight, color.R, color.G, color.B, 100 );
+            Function.Call( Hash.DRAW_RECT, this.GetX( width ), this._settings.GaugePosY, width,
+                this._settings.GaugeHeight, color.R, color.G, color.B, 100 );
         }
     }
 }
