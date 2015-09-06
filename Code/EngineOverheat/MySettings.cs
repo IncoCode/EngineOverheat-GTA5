@@ -27,10 +27,10 @@ namespace EngineOverheat
 
         private void Load()
         {
-            this.GaugePosX = this._settings.Read( "GaugePosX", "GUI", 0.125f );
-            this.GaugePosY = this._settings.Read( "GaugePosY", "GUI", 0.78f );
-            this.GaugeWidth = this._settings.Read( "GaugeWidth", "GUI", 0.15f );
-            this.GaugeHeight = this._settings.Read( "GaugeHeight", "GUI", 0.01f );
+            this.GaugePosX = (float)this._settings.Read( "GaugePosX", "GUI", 0.125 );
+            this.GaugePosY = (float)this._settings.Read( "GaugePosY", "GUI", 0.78 );
+            this.GaugeWidth = (float)this._settings.Read( "GaugeWidth", "GUI", 0.15 );
+            this.GaugeHeight = (float)this._settings.Read( "GaugeHeight", "GUI", 0.01 );
         }
     }
 }
