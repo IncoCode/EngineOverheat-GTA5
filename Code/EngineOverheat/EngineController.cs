@@ -81,15 +81,15 @@ namespace EngineOverheat
                 }
             }
 
-            // debug info
-            Vehicle vehP = player.Character.IsInVehicle() ? player.Character.CurrentVehicle : player.LastVehicle;
-            if ( vehP != null )
-            {
-                var dt = this._engineCollection.GetEngine( vehP );
-                string s = "Temperature = " + dt.Temperature + ", Damage = " + dt.Damage + ", Engine = " +
-                           vehP.EngineHealth + ", RPM = " + vehP.CurrentRPM;
-                UI.ShowSubtitle( s );
-            }
+            //// debug info
+            //Vehicle vehP = player.Character.IsInVehicle() ? player.Character.CurrentVehicle : player.LastVehicle;
+            //if ( vehP != null )
+            //{
+            //    var dt = this._engineCollection.GetEngine( vehP );
+            //    string s = "Temperature = " + dt.Temperature + ", Damage = " + dt.Damage + ", Engine = " +
+            //               vehP.EngineHealth + ", RPM = " + vehP.CurrentRPM;
+            //    UI.ShowSubtitle( s );
+            //}
         }
     }
 }

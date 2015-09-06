@@ -22,14 +22,14 @@ namespace EngineOverheat
 
         private void EngineOverheat_KeyDown( object sender, KeyEventArgs e )
         {
-            if ( e.KeyCode == Keys.I )
-            {
-                this._engineController.EngineForCurrentVehicle().Temperature = 100;
-            }
-            else if ( e.KeyCode == Keys.K )
-            {
-                this._engineController.EngineForCurrentVehicle().Temperature = 50;
-            }
+            //if ( e.KeyCode == Keys.I )
+            //{
+            //    this._engineController.EngineForCurrentVehicle().Temperature = 100;
+            //}
+            //else if ( e.KeyCode == Keys.K )
+            //{
+            //    this._engineController.EngineForCurrentVehicle().Temperature = 50;
+            //}
         }
 
         private void EngineOverheat_Tick( object sender, EventArgs e )
