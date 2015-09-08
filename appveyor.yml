@@ -1,0 +1,36 @@
+version: 1.0.0 Build {build}
+branches:
+  only:
+  - master
+os: Visual Studio 2015
+configuration: Release
+platform: x64
+before_build:
+- ps: >-
+    $original_file = 'Code\\EngineOverheat\\EngineOverheat.csproj'
+
+    $destination_file =  $original_file
+
+    (Get-Content $original_file) | Foreach-Object {
+        $_ -replace '<PostBuildEvent>copy \"\$\(ProjectDir\)\$\(OutDir\)\*.dll\" \"d:\\GAMES\\Steam\\Steam\\SteamApps\\common\\Grand Theft Auto V\\scripts\\\"</PostBuildEvent>', '' `
+        } | Set-Content $destination_file
+    New-Item -ItemType File -Path Code\\EngineOverheat\\bin\\\Release\\README.txt -Force
+
+    Copy-Item README.md Code\\EngineOverheat\\bin\\\Release\\README.txt -Recurse
+
+    Copy-Item EngineOverheat.ini Code\\EngineOverheat\\bin\\\Release\\EngineOverheat.ini -Recurse
+build:
+  project: Code\EngineOverheat.sln
+  verbosity: minimal
+artifacts:
+- path: Code\EngineOverheat\bin\Release\
+  name: EngineOverheat
+deploy:
+- provider: GitHub
+  tag: v$(appveyor_build_version)
+  release: EngineOverheat v$(appveyor_build_version)
+  description: ''
+  auth_token:
+    secure: AGY0VbMye6wM50V01xIXQUn7RiJPukuP5OcD2jZCyK+xhpz86/g7zC3PXqNNIXZi
+  artifact: EngineOverheat
+  draft: true
