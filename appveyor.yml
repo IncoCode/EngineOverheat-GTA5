@@ -1,7 +1,8 @@
-version: 1.0.0 Build {build}
+version: 1.0.1 Build {build}
 branches:
   only:
   - master
+skip_tags: true
 os: Visual Studio 2015
 configuration: Release
 platform: x64
