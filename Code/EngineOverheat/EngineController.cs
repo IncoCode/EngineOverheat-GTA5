@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using GTA;
 using GTA.Native;
 using Ini;
@@ -38,8 +37,10 @@ namespace EngineOverheat
             string vehStr = vehicle.ToString();
             if ( !this._vehicleModifiers.ContainsKey( vehStr ) )
             {
-                float incTempMod = (float)this._vehicleSettings.Read( "IncTempModifier", vehStr, (double)IncTempModifier );
-                float decTempMod = (float)this._vehicleSettings.Read( "DecTempModifier", vehStr, (double)DecTempModifier );
+                float incTempMod =
+                    (float)this._vehicleSettings.Read( "IncTempModifier", vehStr, (double)IncTempModifier );
+                float decTempMod =
+                    (float)this._vehicleSettings.Read( "DecTempModifier", vehStr, (double)DecTempModifier );
                 this._vehicleModifiers.Add( vehStr, new VehicleSetting( incTempMod, decTempMod, vehStr ) );
             }
             return this._vehicleModifiers[ vehStr ];
