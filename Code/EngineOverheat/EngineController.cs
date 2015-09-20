@@ -115,7 +115,7 @@ namespace EngineOverheat
             if ( vehP != null )
             {
                 var dt = this._engineCollection.GetEngine( vehP );
-                string s = "Temperature = " + dt.Temperature + ", Damage = " + dt.Damage + ", Engine = " +
+                string s = "Temperature = " + dt?.Temperature + ", Damage = " + dt?.Damage + ", Engine = " +
                            vehP.EngineHealth + ", RPM = " + vehP.Acceleration;
                 UI.ShowSubtitle( s );
             }

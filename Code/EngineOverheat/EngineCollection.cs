@@ -44,9 +44,16 @@ namespace EngineOverheat
                 .ToDictionary( v => v.Key, v => v.Value );
         }
 
+        private bool IsEnable( Vehicle vehicle )
+        {
+            Model model = vehicle.Model;
+            return vehicle.GetPedOnSeat( VehicleSeat.Driver ) == Game.Player.Character
+                   && ( model.IsBike || model.IsCar || model.IsQuadbike );
+        }
+
         public Engine GetEngine( Vehicle vehicle )
         {
-            if ( vehicle == null || vehicle.GetPedOnSeat( VehicleSeat.Driver ) != Game.Player.Character )
+            if ( vehicle == null || !this.IsEnable( vehicle ) )
             {
                 return null;
             }
