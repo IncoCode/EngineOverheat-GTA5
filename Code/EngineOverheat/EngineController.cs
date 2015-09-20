@@ -1,7 +1,10 @@
 ﻿#region Using
 
 using System.Collections.Generic;
+using System.Linq;
 using GTA;
+using GTA.Native;
+using Ini;
 
 #endregion
 
@@ -10,16 +13,29 @@ namespace EngineOverheat
     internal class EngineController
     {
         private readonly EngineCollection _engineCollection;
+        private readonly IniFile _vehicleSettings;
+
+        private const float IncTempModifier = 0.1f;
+        private const float DecTempModifier = 0.25f;
 
         public EngineController( int maxSize = 10 )
         {
             this._engineCollection = new EngineCollection( maxSize );
+            this._vehicleSettings = new IniFile( "scripts\\EngineOverheatVehicle.ini" );
         }
 
         public Engine EngineForCurrentVehicle()
         {
             var currVeh = Game.Player.Character.CurrentVehicle;
             return currVeh == null ? null : this._engineCollection.GetEngine( currVeh );
+        }
+
+        private VehicleSetting ReadVehicleSettings( VehicleHash vehicle )
+        {
+            string vehStr = vehicle.ToString();
+            float incTempMod = (float)this._vehicleSettings.Read( "IncTempModifier", vehStr, (double)IncTempModifier );
+            float decTempMod = (float)this._vehicleSettings.Read( "DecTempModifier", vehStr, (double)DecTempModifier );
+            return new VehicleSetting( incTempMod, decTempMod, vehStr );
         }
 
         public void Tick()
@@ -33,16 +49,19 @@ namespace EngineOverheat
                 var veh = new Vehicle( kvp.Key );
                 Engine engine = kvp.Value.Engine;
                 float acceleration = veh.Acceleration;
+                VehicleSetting vehicleSettings = this.ReadVehicleSettings( (VehicleHash)veh.Model.Hash );
+                float incTempMod = vehicleSettings.IncTempModifier;
+                float decTempMod = vehicleSettings.DecTempModifier;
 
                 if ( veh.EngineRunning )
                 {
-                    var val = 0.1f * acceleration;
+                    var val = incTempMod * acceleration;
                     engine.Temperature += val == 0 ? 0.0006f : val;
                 }
 
                 if ( engine.Temperature > 30 || !veh.EngineRunning )
                 {
-                    engine.Temperature -= 0.025f * ( 0.25f + ( !veh.EngineRunning ? 1.35f : 0 ) );
+                    engine.Temperature -= 0.025f * ( decTempMod + ( !veh.EngineRunning ? 1.35f : 0 ) );
                 }
                 if ( veh.EngineHealth > 400 && engine.Broken )
                 {
