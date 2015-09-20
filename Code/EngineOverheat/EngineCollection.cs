@@ -71,7 +71,7 @@ namespace EngineOverheat
                     this._vehicles.Remove( this._vehicles.Last().Key );
                 }
 
-                engineDt = new EngineData( new Engine( vehicle.EngineRunning ? 30 : 0 ), DateTime.Now );
+                engineDt = new EngineData( new Engine( vehicle.EngineRunning ? 30 : 0, vehicle ), DateTime.Now );
                 this._vehicles.Add( vehicle.Handle, engineDt );
             }
             this.Sort();

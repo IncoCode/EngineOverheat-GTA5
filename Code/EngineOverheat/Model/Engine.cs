@@ -1,9 +1,16 @@
-﻿namespace EngineOverheat.Model
+﻿#region Using
+
+using GTA;
+
+#endregion
+
+namespace EngineOverheat.Model
 {
-    internal class Engine
+    public class Engine
     {
-        private float _temperature = 0;
-        private float _damage = 0;
+        private float _temperature;
+        private float _damage;
+        private readonly Vehicle _vehicle;
 
         #region Fields
 
@@ -43,16 +50,19 @@
 
         public bool Broken { get; set; }
 
+        public Vehicle Vehicle => this._vehicle;
+
         #endregion
 
-        public Engine( float temperature )
+        public Engine( float temperature, Vehicle vehicle )
         {
             this._temperature = temperature;
+            this._vehicle = vehicle;
             this.Broken = false;
         }
 
-        public Engine()
-            : this( 0 )
+        public Engine( Vehicle vehicle )
+            : this( 0, vehicle )
         {
         }
     }

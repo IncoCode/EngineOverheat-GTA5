@@ -2,6 +2,7 @@
 
 using System;
 using System.Windows.Forms;
+using EngineOverheat.Model;
 using GTA;
 
 #endregion
@@ -11,8 +12,8 @@ namespace EngineOverheat
     public class EngineOverheat : Script
     {
         private readonly EngineController _engineController;
-        private readonly GUI _gui;
-        private readonly MySettings _settings;
+
+        public static Engine Engine;
 
         public EngineOverheat()
         {
@@ -21,8 +22,6 @@ namespace EngineOverheat
             this.KeyDown += this.EngineOverheat_KeyDown;
 
             this._engineController = new EngineController();
-            this._settings = new MySettings();
-            this._gui = new GUI( this._settings );
         }
 
         private void EngineOverheat_KeyDown( object sender, KeyEventArgs e )
@@ -40,12 +39,7 @@ namespace EngineOverheat
         private void EngineOverheat_Tick( object sender, EventArgs e )
         {
             this._engineController.Tick();
-            var engine = this._engineController.EngineForCurrentVehicle();
-            if ( engine == null )
-            {
-                return;
-            }
-            //this._gui.DrawTempGauge( engine.Temperature );
+            Engine = this._engineController.EngineForCurrentVehicle();
         }
     }
 }

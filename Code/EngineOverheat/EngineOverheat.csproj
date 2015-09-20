@@ -70,6 +70,7 @@
     <Compile Include="EngineCollection.cs" />
     <Compile Include="EngineController.cs" />
     <Compile Include="EngineOverheat.cs" />
+    <Compile Include="EngineOverheatTick.cs" />
     <Compile Include="GUI.cs" />
     <Compile Include="Model\Engine.cs" />
     <Compile Include="Model\VehicleSetting.cs" />

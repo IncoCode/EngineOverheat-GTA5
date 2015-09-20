@@ -105,10 +105,6 @@ namespace EngineOverheat
                         engine.Broken = true;
                     }
                 }
-                if ( engine.Broken && veh.EngineRunning )
-                {
-                    veh.EngineRunning = false;
-                }
             }
 
             // debug info
