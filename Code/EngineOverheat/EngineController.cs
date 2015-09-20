@@ -111,6 +111,7 @@ namespace EngineOverheat
             }
 
             // debug info
+#if DEBUG
             Vehicle vehP = player.Character.IsInVehicle() ? player.Character.CurrentVehicle : player.LastVehicle;
             if ( vehP != null )
             {
@@ -119,6 +120,7 @@ namespace EngineOverheat
                            vehP.EngineHealth + ", RPM = " + vehP.Acceleration;
                 UI.ShowSubtitle( s );
             }
+#endif
         }
     }
 }
