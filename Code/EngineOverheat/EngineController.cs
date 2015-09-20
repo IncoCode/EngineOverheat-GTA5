@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using EngineOverheat.Model;
 using GTA;
 using GTA.Native;
 using Ini;

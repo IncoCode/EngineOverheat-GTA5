@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using EngineOverheat.Model;
 using GTA;
 
 #endregion
@@ -46,7 +47,7 @@ namespace EngineOverheat
 
         private bool IsEnable( Vehicle vehicle )
         {
-            Model model = vehicle.Model;
+            GTA.Model model = vehicle.Model;
             return vehicle.GetPedOnSeat( VehicleSeat.Driver ) == Game.Player.Character
                    && ( model.IsBike || model.IsCar || model.IsQuadbike );
         }

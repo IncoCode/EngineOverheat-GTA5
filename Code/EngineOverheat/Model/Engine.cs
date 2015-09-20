@@ -1,4 +1,4 @@
-﻿namespace EngineOverheat
+﻿namespace EngineOverheat.Model
 {
     internal class Engine
     {
