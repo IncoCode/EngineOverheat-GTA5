@@ -17,8 +17,8 @@ namespace EngineOverheat
         private readonly IniFile _vehicleSettings;
         private readonly Dictionary<string, VehicleSetting> _vehicleModifiers;
 
-        private const float IncTempModifier = 0.1f;
-        private const float DecTempModifier = 0.25f;
+        private const float IncTempModifier = 0.07f;
+        private const float DecTempModifier = 0.35f;
 
         public EngineController( int maxSize = 10 )
         {
