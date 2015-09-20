@@ -1,5 +1,6 @@
 ﻿#region Using
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using GTA;
@@ -54,7 +55,7 @@ namespace EngineOverheat
             {
                 var veh = new Vehicle( kvp.Key );
                 Engine engine = kvp.Value.Engine;
-                float acceleration = veh.Acceleration;
+                float acceleration = Math.Abs( veh.Acceleration );
                 VehicleSetting vehicleSettings = this.ReadVehicleSettings( (VehicleHash)veh.Model.Hash );
                 float incTempMod = vehicleSettings.IncTempModifier;
                 float decTempMod = vehicleSettings.DecTempModifier;
