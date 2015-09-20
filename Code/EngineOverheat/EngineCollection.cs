@@ -46,7 +46,7 @@ namespace EngineOverheat
 
         public Engine GetEngine( Vehicle vehicle )
         {
-            if ( vehicle == null )
+            if ( vehicle == null || vehicle.GetPedOnSeat( VehicleSeat.Driver ) != Game.Player.Character )
             {
                 return null;
             }
