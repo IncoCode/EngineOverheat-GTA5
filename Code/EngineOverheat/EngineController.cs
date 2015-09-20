@@ -14,6 +14,7 @@ namespace EngineOverheat
     {
         private readonly EngineCollection _engineCollection;
         private readonly IniFile _vehicleSettings;
+        private readonly Dictionary<string, VehicleSetting> _vehicleModifiers;
 
         private const float IncTempModifier = 0.1f;
         private const float DecTempModifier = 0.25f;
@@ -22,6 +23,7 @@ namespace EngineOverheat
         {
             this._engineCollection = new EngineCollection( maxSize );
             this._vehicleSettings = new IniFile( "scripts\\EngineOverheatVehicle.ini" );
+            this._vehicleModifiers = new Dictionary<string, VehicleSetting>();
         }
 
         public Engine EngineForCurrentVehicle()
@@ -33,9 +35,13 @@ namespace EngineOverheat
         private VehicleSetting ReadVehicleSettings( VehicleHash vehicle )
         {
             string vehStr = vehicle.ToString();
-            float incTempMod = (float)this._vehicleSettings.Read( "IncTempModifier", vehStr, (double)IncTempModifier );
-            float decTempMod = (float)this._vehicleSettings.Read( "DecTempModifier", vehStr, (double)DecTempModifier );
-            return new VehicleSetting( incTempMod, decTempMod, vehStr );
+            if ( !this._vehicleModifiers.ContainsKey( vehStr ) )
+            {
+                float incTempMod = (float)this._vehicleSettings.Read( "IncTempModifier", vehStr, (double)IncTempModifier );
+                float decTempMod = (float)this._vehicleSettings.Read( "DecTempModifier", vehStr, (double)DecTempModifier );
+                this._vehicleModifiers.Add( vehStr, new VehicleSetting( incTempMod, decTempMod, vehStr ) );
+            }
+            return this._vehicleModifiers[ vehStr ];
         }
 
         public void Tick()
