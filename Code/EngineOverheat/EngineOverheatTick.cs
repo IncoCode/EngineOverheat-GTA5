@@ -34,11 +34,11 @@ namespace EngineOverheat
         {
             Engine engine = EngineOverheat.Engine;
             float? engineHealth = EngineOverheat.EngineHealth;
-            if ( engine != null )
+            if ( engine != null && this._settings.ShowTempGauge )
             {
                 this._gui.DrawTempGauge( engine.Temperature );
             }
-            if ( engineHealth.HasValue )
+            if ( engineHealth.HasValue && this._settings.ShowEngineHealthGauge )
             {
                 this._gui.DrawEngineHealthGauge( engineHealth.Value );
             }

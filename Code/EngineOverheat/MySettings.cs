@@ -25,6 +25,9 @@ namespace EngineOverheat
         public float EngineHealthGaugeWidth { get; private set; }
         public float EngineHealthGaugeHeight { get; private set; }
 
+        public bool ShowEngineHealthGauge { get; private set; }
+        public bool ShowTempGauge { get; private set; }
+
         #endregion
 
         public MySettings()
@@ -44,6 +47,9 @@ namespace EngineOverheat
             this.EngineHealthGaugePosY = (float)this._settings.Read( "EngineHealthGaugePosY", "GUI", 0.805 );
             this.EngineHealthGaugeWidth = (float)this._settings.Read( "EngineHealthGaugeWidth", "GUI", 0.15 );
             this.EngineHealthGaugeHeight = (float)this._settings.Read( "EngineHealthGaugeHeight", "GUI", 0.01 );
+
+            this.ShowTempGauge = this._settings.Read( "ShowTempGauge", "GUI", true );
+            this.ShowEngineHealthGauge = this._settings.Read( "EngineHealthGaugeHeight", "GUI", true );
         }
     }
 }
