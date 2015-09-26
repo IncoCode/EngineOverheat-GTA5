@@ -12,10 +12,15 @@ namespace EngineOverheat
 
         #region Fields
 
-        public float GaugePosX { get; private set; }
-        public float GaugePosY { get; private set; }
-        public float GaugeWidth { get; private set; }
-        public float GaugeHeight { get; private set; }
+        public float TempGaugePosX { get; private set; }
+        public float TempGaugePosY { get; private set; }
+        public float TempGaugeWidth { get; private set; }
+        public float TempGaugeHeight { get; private set; }
+
+        public float EngineHealthGaugePosX { get; private set; }
+        public float EngineHealthGaugePosY { get; private set; }
+        public float EngineHealthGaugeWidth { get; private set; }
+        public float EngineHealthGaugeHeight { get; private set; }
 
         #endregion
 
@@ -27,10 +32,15 @@ namespace EngineOverheat
 
         private void Load()
         {
-            this.GaugePosX = (float)this._settings.Read( "GaugePosX", "GUI", 0.125 );
-            this.GaugePosY = (float)this._settings.Read( "GaugePosY", "GUI", 0.78 );
-            this.GaugeWidth = (float)this._settings.Read( "GaugeWidth", "GUI", 0.15 );
-            this.GaugeHeight = (float)this._settings.Read( "GaugeHeight", "GUI", 0.01 );
+            this.TempGaugePosX = (float)this._settings.Read( "TempGaugePosX", "GUI", 0.125 );
+            this.TempGaugePosY = (float)this._settings.Read( "TempGaugePosY", "GUI", 0.78 );
+            this.TempGaugeWidth = (float)this._settings.Read( "TempGaugeWidth", "GUI", 0.15 );
+            this.TempGaugeHeight = (float)this._settings.Read( "TempGaugeHeight", "GUI", 0.01 );
+
+            this.EngineHealthGaugePosX = (float)this._settings.Read( "EngineHealthGaugePosX", "GUI", 0.125 );
+            this.EngineHealthGaugePosY = (float)this._settings.Read( "EngineHealthGaugePosY", "GUI", 0.805 );
+            this.EngineHealthGaugeWidth = (float)this._settings.Read( "EngineHealthGaugeWidth", "GUI", 0.15 );
+            this.EngineHealthGaugeHeight = (float)this._settings.Read( "EngineHealthGaugeHeight", "GUI", 0.01 );
         }
     }
 }

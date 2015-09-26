@@ -33,11 +33,15 @@ namespace EngineOverheat
         private void UpdGui()
         {
             Engine engine = EngineOverheat.Engine;
-            if ( engine == null )
+            float? engineHealth = EngineOverheat.EngineHealth;
+            if ( engine != null )
             {
-                return;
+                this._gui.DrawTempGauge( engine.Temperature );
             }
-            this._gui.DrawTempGauge( engine.Temperature );
+            if ( engineHealth.HasValue )
+            {
+                this._gui.DrawEngineHealthGauge( engineHealth.Value );
+            }
         }
 
         private void EngineOverheatTick_Tick( object sender, EventArgs e )

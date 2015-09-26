@@ -24,8 +24,8 @@ namespace EngineOverheat
 
         private float GetX( float width )
         {
-            float maxX = this._settings.GaugePosX * 2;
-            return ( maxX / 2f - this._settings.GaugeWidth / 2f ) + ( width / 2 );
+            float maxX = this._settings.TempGaugePosX * 2;
+            return ( maxX / 2f - this._settings.TempGaugeWidth / 2f ) + ( width / 2 );
         }
 
         private Color ColorForPercent( float percent )
@@ -37,16 +37,33 @@ namespace EngineOverheat
 
         public void DrawTempGauge( float temperature )
         {
-            float width = this._settings.GaugeWidth / 100 * temperature;
+            float width = this._settings.TempGaugeWidth / 100 * temperature;
 
             // draws background gauge
-            Function.Call( Hash.DRAW_RECT, this._settings.GaugePosX, this._settings.GaugePosY, this._settings.GaugeWidth,
-                this._settings.GaugeHeight, this.BackgroundColor.R, this.BackgroundColor.G, this.BackgroundColor.B, 100 );
+            Function.Call( Hash.DRAW_RECT, this._settings.TempGaugePosX, this._settings.TempGaugePosY,
+                this._settings.TempGaugeWidth,
+                this._settings.TempGaugeHeight, this.BackgroundColor.R, this.BackgroundColor.G, this.BackgroundColor.B,
+                100 );
 
             Color color = this.ColorForPercent( temperature / 100 );
             // draws temperature gauge
-            Function.Call( Hash.DRAW_RECT, this.GetX( width ), this._settings.GaugePosY, width,
-                this._settings.GaugeHeight, color.R, color.G, color.B, 100 );
+            Function.Call( Hash.DRAW_RECT, this.GetX( width ), this._settings.TempGaugePosY, width,
+                this._settings.TempGaugeHeight, color.R, color.G, color.B, 100 );
+        }
+
+        public void DrawEngineHealthGauge( float health )
+        {
+            float width = this._settings.TempGaugeWidth / 1000 * health;
+
+            // draws background gauge
+            Function.Call( Hash.DRAW_RECT, this._settings.EngineHealthGaugePosX, this._settings.EngineHealthGaugePosY,
+                this._settings.EngineHealthGaugeWidth, this._settings.EngineHealthGaugeHeight, this.BackgroundColor.R,
+                this.BackgroundColor.G, this.BackgroundColor.B, 100 );
+
+            Color color = this.ColorForPercent( ( 1000 - health ) / 1000 );
+            // draws engine health gauge
+            Function.Call( Hash.DRAW_RECT, this.GetX( width ), this._settings.EngineHealthGaugePosY, width,
+                this._settings.EngineHealthGaugeHeight, color.R, color.G, color.B, 100 );
         }
     }
 }

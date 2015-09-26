@@ -14,6 +14,7 @@ namespace EngineOverheat
         private readonly EngineController _engineController;
 
         public static Engine Engine;
+        public static float? EngineHealth = 0;
 
         public EngineOverheat()
         {
@@ -38,8 +39,10 @@ namespace EngineOverheat
 
         private void EngineOverheat_Tick( object sender, EventArgs e )
         {
+            Player player = Game.Player;
             this._engineController.Tick();
             Engine = this._engineController.EngineForCurrentVehicle();
+            EngineHealth = player.Character.CurrentVehicle?.EngineHealth;
         }
     }
 }
