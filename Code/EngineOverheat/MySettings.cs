@@ -9,8 +9,11 @@ namespace EngineOverheat
     internal class MySettings
     {
         private readonly IniFile _settings;
+        private static MySettings _instance;
 
         #region Fields
+
+        public static MySettings Instance => _instance ?? ( _instance = new MySettings() );
 
         public float TempGaugePosX { get; private set; }
         public float TempGaugePosY { get; private set; }

@@ -16,7 +16,7 @@ namespace EngineOverheat
         public EngineOverheatTick()
         {
             this.Tick += this.EngineOverheatTick_Tick;
-            this._settings = new MySettings();
+            this._settings = MySettings.Instance;
             this._gui = new GUI( this._settings );
         }
 
