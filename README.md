@@ -1,7 +1,7 @@
 # EngineOverheat-GTA5
 [![Build status](https://ci.appveyor.com/api/projects/status/c5isoly36gap2jea/branch/master?svg=true)](https://ci.appveyor.com/project/IncoCode/engineoverheat-gta5/branch/master)
 
-<img src="img/poster.jpg" alt="alt text" width="650" height="520">
+<img src="img/poster.jpg" width="650" height="520">
 
 This mod adds a little bit realism in GTA 5. When you push your car too hard and too fast the car engine gets overheated. When it's happened your engine starts smoking and will disabled. You should wait a some time until the engine has cooled.
 
@@ -30,6 +30,8 @@ Open **EngineOverheatVehicle.ini** file and add a new section with modifiers. Fo
 IncTempModifier=0,09
 DecTempModifier=0,30
 ```
+<img src="img/user_modifiers.png">
+
 The list of vehicle hash can be found [here](https://github.com/crosire/scripthookvdotnet/blob/dev/source/VehicleHashes.hpp#L7).
 
 Default overheat modifiers
