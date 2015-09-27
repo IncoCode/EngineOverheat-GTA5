@@ -58,6 +58,10 @@ namespace EngineOverheat
             {
                 health = 1000;
             }
+            else if ( health < 0 )
+            {
+                health = 0;
+            }
 
             // draws background gauge
             Function.Call( Hash.DRAW_RECT, this._settings.EngineHealthGaugePosX, this._settings.EngineHealthGaugePosY,
