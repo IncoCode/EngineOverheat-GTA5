@@ -43,6 +43,9 @@ DecTempModifier=0,35
 
 Changelog
 --------------
+v1.0.2
+- Fixed bug with Franklin's Buffalo.
+
 v1.0.1
 - New overheat formula;
 - Different modifiers for different cars;
