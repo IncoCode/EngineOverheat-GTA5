@@ -53,7 +53,6 @@ namespace EngineOverheat
 
         public void DrawEngineHealthGauge( float health )
         {
-            float width = this._settings.EngineHealthGaugeWidth / 1000 * health;
             if ( health > 1000 )
             {
                 health = 1000;
@@ -62,6 +61,7 @@ namespace EngineOverheat
             {
                 health = 0;
             }
+            float width = this._settings.EngineHealthGaugeWidth / 1000 * health;
 
             // draws background gauge
             Function.Call( Hash.DRAW_RECT, this._settings.EngineHealthGaugePosX, this._settings.EngineHealthGaugePosY,
