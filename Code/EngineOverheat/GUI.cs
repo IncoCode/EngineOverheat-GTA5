@@ -53,7 +53,7 @@ namespace EngineOverheat
 
         public void DrawEngineHealthGauge( float health )
         {
-            float width = this._settings.TempGaugeWidth / 1000 * health;
+            float width = this._settings.EngineHealthGaugeWidth / 1000 * health;
             if ( health > 1000 )
             {
                 health = 1000;
