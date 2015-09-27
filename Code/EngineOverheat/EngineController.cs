@@ -38,10 +38,8 @@ namespace EngineOverheat
             string vehStr = vehicle.ToString();
             if ( !this._vehicleModifiers.ContainsKey( vehStr ) )
             {
-                float incTempMod =
-                    (float)this._vehicleSettings.Read( "IncTempModifier", vehStr, (double)IncTempModifier );
-                float decTempMod =
-                    (float)this._vehicleSettings.Read( "DecTempModifier", vehStr, (double)DecTempModifier );
+                float incTempMod = this._vehicleSettings.Read( "IncTempModifier", vehStr, IncTempModifier );
+                float decTempMod = this._vehicleSettings.Read( "DecTempModifier", vehStr, DecTempModifier );
                 this._vehicleModifiers.Add( vehStr, new VehicleSetting( incTempMod, decTempMod, vehStr ) );
             }
             return this._vehicleModifiers[ vehStr ];

@@ -38,15 +38,15 @@ namespace EngineOverheat
 
         private void Load()
         {
-            this.TempGaugePosX = (float)this._settings.Read( "TempGaugePosX", "GUI", 0.125 );
-            this.TempGaugePosY = (float)this._settings.Read( "TempGaugePosY", "GUI", 0.78 );
-            this.TempGaugeWidth = (float)this._settings.Read( "TempGaugeWidth", "GUI", 0.15 );
-            this.TempGaugeHeight = (float)this._settings.Read( "TempGaugeHeight", "GUI", 0.01 );
+            this.TempGaugePosX = this._settings.Read( "TempGaugePosX", "GUI", 0.125f );
+            this.TempGaugePosY = this._settings.Read( "TempGaugePosY", "GUI", 0.78f );
+            this.TempGaugeWidth = this._settings.Read( "TempGaugeWidth", "GUI", 0.15f );
+            this.TempGaugeHeight = this._settings.Read( "TempGaugeHeight", "GUI", 0.01f );
 
-            this.EngineHealthGaugePosX = (float)this._settings.Read( "EngineHealthGaugePosX", "GUI", 0.125 );
-            this.EngineHealthGaugePosY = (float)this._settings.Read( "EngineHealthGaugePosY", "GUI", 0.805 );
-            this.EngineHealthGaugeWidth = (float)this._settings.Read( "EngineHealthGaugeWidth", "GUI", 0.15 );
-            this.EngineHealthGaugeHeight = (float)this._settings.Read( "EngineHealthGaugeHeight", "GUI", 0.01 );
+            this.EngineHealthGaugePosX = this._settings.Read( "EngineHealthGaugePosX", "GUI", 0.125f );
+            this.EngineHealthGaugePosY = this._settings.Read( "EngineHealthGaugePosY", "GUI", 0.805f );
+            this.EngineHealthGaugeWidth = this._settings.Read( "EngineHealthGaugeWidth", "GUI", 0.15f );
+            this.EngineHealthGaugeHeight = this._settings.Read( "EngineHealthGaugeHeight", "GUI", 0.01f );
 
             this.ShowTempGauge = this._settings.Read( "ShowTempGauge", "GUI", true );
             this.ShowEngineHealthGauge = this._settings.Read( "EngineHealthGaugeHeight", "GUI", true );
