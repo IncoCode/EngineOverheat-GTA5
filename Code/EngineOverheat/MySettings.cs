@@ -49,7 +49,7 @@ namespace EngineOverheat
             this.EngineHealthGaugeHeight = this._settings.Read( "EngineHealthGaugeHeight", "GUI", 0.01f );
 
             this.ShowTempGauge = this._settings.Read( "ShowTempGauge", "GUI", true );
-            this.ShowEngineHealthGauge = this._settings.Read( "EngineHealthGaugeHeight", "GUI", true );
+            this.ShowEngineHealthGauge = this._settings.Read( "ShowEngineHealthGauge", "GUI", true );
         }
     }
 }
