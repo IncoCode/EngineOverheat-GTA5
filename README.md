@@ -43,6 +43,9 @@ DecTempModifier=0,35
 
 Changelog
 --------------
+v1.0.3
+- Fixed a bug related to disable gauges feature.
+
 v1.0.2
 - Fixed bug with Franklin's Buffalo.
 
