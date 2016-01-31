@@ -51,6 +51,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="iFruitAddon">
+      <HintPath>..\packages\iFruitAddon.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="IniFile">
       <HintPath>..\packages\IniFile.dll</HintPath>
     </Reference>
