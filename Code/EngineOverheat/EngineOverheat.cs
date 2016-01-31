@@ -27,6 +27,7 @@ namespace EngineOverheat
 
         private void EngineOverheat_KeyDown( object sender, KeyEventArgs e )
         {
+#if DEBUG
             if ( e.KeyCode == Keys.I )
             {
                 this._engineController.EngineForCurrentVehicle().Temperature = 100;
@@ -35,6 +36,7 @@ namespace EngineOverheat
             {
                 this._engineController.EngineForCurrentVehicle().Temperature = 50;
             }
+#endif
         }
 
         private void EngineOverheat_Tick( object sender, EventArgs e )
