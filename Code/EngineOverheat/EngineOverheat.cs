@@ -14,6 +14,8 @@ namespace EngineOverheat
     public class EngineOverheat : Script
     {
         private readonly EngineController _engineController;
+        private readonly MechanicController _mechanicController;
+        private readonly TaskSequenceEventController _taskSequenceEventController;
 
         public static Engine Engine;
         public static float? EngineHealth = 0;
@@ -27,6 +29,9 @@ namespace EngineOverheat
             this.KeyDown += this.EngineOverheat_KeyDown;
 
             this._engineController = new EngineController();
+            this._taskSequenceEventController = TaskSequenceEventController.Instance;
+            this._mechanicController = new MechanicController( this._taskSequenceEventController );
+
             this.InitMobile();
         }
 
@@ -41,6 +46,10 @@ namespace EngineOverheat
             {
                 this._engineController.EngineForCurrentVehicle().Temperature = 50;
             }
+            else if ( e.KeyCode == Keys.L )
+            {
+                Contact_Answered( null );
+            }
 #endif
         }
 
@@ -52,6 +61,7 @@ namespace EngineOverheat
             EngineHealth = player.Character.CurrentVehicle?.EngineHealth;
 
             this._iFruit.Update();
+            this._taskSequenceEventController.Update();
         }
 
         private void InitMobile()
@@ -67,7 +77,8 @@ namespace EngineOverheat
         private void Contact_Answered( iFruitContact contact )
         {
             UI.Notify( "Answered" );
-            contact.EndCall();
+            this._mechanicController.CallMechanic( Game.Player.Character.CurrentVehicle );
+            //contact.EndCall();
         }
     }
 }
