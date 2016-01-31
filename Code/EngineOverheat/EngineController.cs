@@ -29,20 +29,20 @@ namespace EngineOverheat
 
         public Engine EngineForCurrentVehicle()
         {
-            var currVeh = Game.Player.Character.CurrentVehicle;
-            return currVeh == null ? null : this._engineCollection.GetEngine( currVeh );
+            var currentVehicle = Game.Player.Character.CurrentVehicle;
+            return currentVehicle == null ? null : this._engineCollection.GetEngine( currentVehicle );
         }
 
         private VehicleSetting ReadVehicleSettings( VehicleHash vehicle )
         {
-            string vehStr = vehicle.ToString();
-            if ( !this._vehicleModifiers.ContainsKey( vehStr ) )
+            string vehicleStr = vehicle.ToString();
+            if ( !this._vehicleModifiers.ContainsKey( vehicleStr ) )
             {
-                float incTempMod = this._vehicleSettings.Read( "IncTempModifier", vehStr, IncTempModifier );
-                float decTempMod = this._vehicleSettings.Read( "DecTempModifier", vehStr, DecTempModifier );
-                this._vehicleModifiers.Add( vehStr, new VehicleSetting( incTempMod, decTempMod, vehStr ) );
+                float incTempMod = this._vehicleSettings.Read( "IncTempModifier", vehicleStr, IncTempModifier );
+                float decTempMod = this._vehicleSettings.Read( "DecTempModifier", vehicleStr, DecTempModifier );
+                this._vehicleModifiers.Add( vehicleStr, new VehicleSetting( incTempMod, decTempMod, vehicleStr ) );
             }
-            return this._vehicleModifiers[ vehStr ];
+            return this._vehicleModifiers[ vehicleStr ];
         }
 
         public void Tick()

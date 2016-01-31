@@ -58,11 +58,11 @@ namespace EngineOverheat
             {
                 return null;
             }
-            EngineData engineDt;
+            EngineData engineData;
             if ( this._vehicles.ContainsKey( vehicle.Handle ) )
             {
-                engineDt = this._vehicles[ vehicle.Handle ];
-                engineDt.UpdateUsage();
+                engineData = this._vehicles[ vehicle.Handle ];
+                engineData.UpdateUsage();
             }
             else
             {
@@ -71,11 +71,11 @@ namespace EngineOverheat
                     this._vehicles.Remove( this._vehicles.Last().Key );
                 }
 
-                engineDt = new EngineData( new Engine( vehicle.EngineRunning ? 30 : 0, vehicle ), DateTime.Now );
-                this._vehicles.Add( vehicle.Handle, engineDt );
+                engineData = new EngineData( new Engine( vehicle.EngineRunning ? 30 : 0, vehicle ), DateTime.Now );
+                this._vehicles.Add( vehicle.Handle, engineData );
             }
             this.Sort();
-            return engineDt.Engine;
+            return engineData.Engine;
         }
 
         #region Members
