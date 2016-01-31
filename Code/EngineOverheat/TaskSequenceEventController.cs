@@ -33,7 +33,8 @@ namespace EngineOverheat
                 .FirstOrDefault( tsd => tsd.Ped == ped && tsd.TaskSequence == taskSequence );
         }
 
-        public void Subscribe( int sequenceIndex, Ped ped, TaskSequence taskSequence, Action action )
+        public void Subscribe( int sequenceIndex, Ped ped, TaskSequence taskSequence, Action action,
+            bool everyTick = false )
         {
             TaskSequenceData taskSequenceData = this.GetTaskSequenceData( ped, taskSequence );
             if ( taskSequenceData == null )
@@ -41,7 +42,14 @@ namespace EngineOverheat
                 taskSequenceData = new TaskSequenceData( ped, taskSequence );
                 this._taskSequencesData.Add( taskSequenceData );
             }
-            taskSequenceData.FireWhenSequenceIndex( sequenceIndex, action );
+            if ( everyTick )
+            {
+                taskSequenceData.FireWhenSequenceIndexEveryTick( sequenceIndex, action );
+            }
+            else
+            {
+                taskSequenceData.FireWhenSequenceIndex( sequenceIndex, action );
+            }
         }
 
         public void UnsubscribeAll( Ped ped, TaskSequence taskSequence )

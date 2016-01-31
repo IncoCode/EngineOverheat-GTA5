@@ -56,7 +56,7 @@ namespace EngineOverheat.Model
 
         public void FireWhenSequenceIndexEveryTick( int sequenceIndex, Action action )
         {
-            this.AddAction( this._actions, sequenceIndex, action );
+            this.AddAction( this._actionsEveryTick, sequenceIndex, action );
         }
 
         public void Update()
