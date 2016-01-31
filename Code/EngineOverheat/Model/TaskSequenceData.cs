@@ -15,6 +15,7 @@ namespace EngineOverheat.Model
         public TaskSequence TaskSequence { get; private set; }
 
         private readonly Dictionary<int, List<Action>> _actions;
+        private int _lastFiredIndex = -1;
 
         public TaskSequenceData( Ped ped, TaskSequence taskSequence, bool isActive = true )
         {
@@ -31,6 +32,7 @@ namespace EngineOverheat.Model
             if ( !this._actions.TryGetValue( sequenceIndex, out actionsList ) )
             {
                 actionsList = new List<Action>();
+                this._actions.Add( sequenceIndex, actionsList );
             }
             actionsList.Add( action );
         }
@@ -38,6 +40,12 @@ namespace EngineOverheat.Model
         public void Update()
         {
             var sequenceIndex = this.Ped.TaskSequenceProgress;
+            if ( !this.IsActive || this._lastFiredIndex == sequenceIndex )
+            {
+                return;
+            }
+
+            this._lastFiredIndex = sequenceIndex;
             List<Action> actions;
             if ( !this._actions.TryGetValue( sequenceIndex, out actions ) )
             {
