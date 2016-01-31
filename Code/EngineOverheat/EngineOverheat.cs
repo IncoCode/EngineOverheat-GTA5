@@ -4,7 +4,6 @@ using System;
 using System.Windows.Forms;
 using EngineOverheat.Model;
 using GTA;
-using GTA.Native;
 using iFruitAddon;
 
 #endregion
@@ -48,7 +47,7 @@ namespace EngineOverheat
             }
             else if ( e.KeyCode == Keys.L )
             {
-                Contact_Answered( null );
+                this.Contact_Answered( null );
             }
 #endif
         }
@@ -68,7 +67,7 @@ namespace EngineOverheat
         {
             this._iFruit = new CustomiFruit();
             var contact = new iFruitContact( "Call Mechanic", 24 );
-            contact.Answered += Contact_Answered;
+            contact.Answered += this.Contact_Answered;
             contact.DialTimeout = 0;
             contact.Active = true;
             this._iFruit.Contacts.Add( contact );

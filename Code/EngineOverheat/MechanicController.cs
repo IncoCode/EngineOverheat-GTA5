@@ -54,13 +54,14 @@ namespace EngineOverheat
                 () =>
                 {
                     this._mechanicPed.MarkAsNoLongerNeeded();
-                    this._mechanicPed.Task.CruiseWithVehicle( this._mechanicVehicle, 30f, (int)DrivingStyle.AvoidTrafficExtremely );
+                    this._mechanicPed.Task.CruiseWithVehicle( this._mechanicVehicle, 30f,
+                        (int)DrivingStyle.AvoidTrafficExtremely );
                     vehicle.IsDriveable = true;
                     this._mechanicBlip.Remove();
                     this._taskSequenceEventController.UnsubscribeAll( this._mechanicPed, tasks );
                     this._mechanicVehicle.MarkAsNoLongerNeeded();
                 }
-            );
+                );
 
             this._mechanicPed.Task.PerformSequence( tasks );
             this._mechanicBlip = this._mechanicPed.AddBlip();

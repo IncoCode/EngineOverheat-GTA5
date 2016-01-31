@@ -10,12 +10,12 @@ using GTA;
 
 namespace EngineOverheat
 {
-
     public class TaskSequenceEventController
     {
         #region Fields
 
-        public static TaskSequenceEventController Instance => _instance ?? ( _instance = new TaskSequenceEventController() );
+        public static TaskSequenceEventController Instance
+            => _instance ?? ( _instance = new TaskSequenceEventController() );
 
         #endregion
 
