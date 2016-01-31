@@ -30,7 +30,7 @@ namespace EngineOverheat
 
         #endregion
 
-        public MySettings()
+        private MySettings()
         {
             this._settings = new IniFile( "scripts\\EngineOverheat.ini" );
             this.Load();
