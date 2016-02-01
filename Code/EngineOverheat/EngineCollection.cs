@@ -25,6 +25,7 @@ namespace EngineOverheat
         private void Sort()
         {
             this._vehicles = this._vehicles.OrderByDescending( v => v.Value.LastUsage )
+                .Where( v => new Vehicle( v.Key ).Exists() )
                 .ToDictionary( v => v.Key, v => v.Value );
         }
 
