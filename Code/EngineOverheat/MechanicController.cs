@@ -66,7 +66,7 @@ namespace EngineOverheat
             var shootPosition = vehicle.GetOffsetInWorldCoords( new Vector3( 0.35f, 5.0f, 0.0f ) );
 
             var tasks = new TaskSequence();
-            tasks.AddTask.DriveTo( this._mechanicVehicle, vehiclePosition, 15f, 60, (int)DrivingStyle.Rushed );
+            tasks.AddTask.DriveTo( this._mechanicVehicle, vehiclePosition, 15f, 40, (int)DrivingStyle.Rushed );
             tasks.AddTask.RunTo( openHoodPosition );
             tasks.AddTask.TurnTo( vehicle, 1000 );
             tasks.AddTask.Wait( 1000 );
