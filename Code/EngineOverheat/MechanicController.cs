@@ -27,7 +27,8 @@ namespace EngineOverheat
         const int CallMechanicPrice = 10000;
 
         private MechanicController()
-        { }
+        {
+        }
 
         private bool TakeMoney()
         {
