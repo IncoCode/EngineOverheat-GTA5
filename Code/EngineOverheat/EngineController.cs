@@ -69,13 +69,18 @@ namespace EngineOverheat
 
                 if ( veh.EngineRunning )
                 {
-                    var val = incTempMod * acceleration;
+                    float val = incTempMod * acceleration;
                     engine.Temperature += val == 0 ? 0.0006f : val;
                 }
 
                 if ( engine.Temperature > 30 || !veh.EngineRunning )
                 {
-                    engine.Temperature -= 0.025f * ( decTempMod + ( !veh.EngineRunning ? 1.35f : 0 ) );
+                    float decreaseTempValue = 0.025f * ( decTempMod + ( !veh.EngineRunning ? 1.35f : 0 ) );
+                    if ( veh.Speed > 40 )
+                    {
+                        decreaseTempValue += ( veh.Speed - 40 ) / 1000;
+                    }
+                    engine.Temperature -= decreaseTempValue;
                 }
                 if ( veh.EngineHealth > 400 && engine.Broken )
                 {
@@ -119,7 +124,7 @@ namespace EngineOverheat
             {
                 var dt = this._engineCollection.GetEngine( vehP );
                 string s = "Temperature = " + dt?.Temperature + ", Damage = " + dt?.Damage + ", Engine = " +
-                           vehP.EngineHealth + ", RPM = " + vehP.Acceleration;
+                           vehP.EngineHealth + ", RPM = " + vehP.Acceleration + ", Speed = " + vehP.Speed;
                 UI.ShowSubtitle( s );
             }
 #endif
