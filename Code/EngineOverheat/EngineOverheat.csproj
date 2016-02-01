@@ -76,6 +76,7 @@
     <Compile Include="GUI.cs" />
     <Compile Include="MechanicController.cs" />
     <Compile Include="Model\Engine.cs" />
+    <Compile Include="Model\EngineData.cs" />
     <Compile Include="Model\TaskSequenceData.cs" />
     <Compile Include="Model\VehicleSetting.cs" />
     <Compile Include="MySettings.cs" />
