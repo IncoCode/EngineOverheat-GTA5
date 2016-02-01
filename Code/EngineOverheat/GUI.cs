@@ -9,18 +9,13 @@ namespace EngineOverheat
 {
     internal class GUI
     {
-        private readonly MySettings _settings;
+        private readonly MySettings _settings = MySettings.Instance;
 
         #region Fields
 
         public Color BackgroundColor = Color.FromArgb( 255, 255, 255 );
 
         #endregion
-
-        public GUI( MySettings settings )
-        {
-            this._settings = settings;
-        }
 
         private float GetX( float width )
         {

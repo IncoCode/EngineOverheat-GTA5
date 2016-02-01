@@ -11,9 +11,9 @@ namespace EngineOverheat
 {
     public class EngineOverheat : Script
     {
-        private readonly EngineController _engineController;
-        private readonly MechanicController _mechanicController;
-        private readonly TaskSequenceEventController _taskSequenceEventController;
+        private readonly EngineController _engineController = EngineController.Instance;
+        private readonly MechanicController _mechanicController = MechanicController.Instance;
+        private readonly TaskSequenceEventController _taskSequenceEventController = TaskSequenceEventController.Instance;
 
         public static Engine Engine;
         public static float? EngineHealth = 0;
@@ -23,10 +23,6 @@ namespace EngineOverheat
             this.Interval = 100;
             this.Tick += this.EngineOverheat_Tick;
             this.KeyDown += this.EngineOverheat_KeyDown;
-
-            this._engineController = new EngineController();
-            this._taskSequenceEventController = TaskSequenceEventController.Instance;
-            this._mechanicController = new MechanicController( this._taskSequenceEventController );
         }
 
         private void EngineOverheat_KeyDown( object sender, KeyEventArgs e )

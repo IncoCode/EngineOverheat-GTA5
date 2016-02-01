@@ -13,14 +13,21 @@ namespace EngineOverheat
 {
     internal class EngineController
     {
+        #region Fields
+
+        public static EngineController Instance => _instance ?? ( _instance = new EngineController() );
+
+        #endregion
+
         private readonly EngineCollection _engineCollection;
         private readonly IniFile _vehicleSettings;
         private readonly Dictionary<string, VehicleSetting> _vehicleModifiers;
+        private static EngineController _instance;
 
         private const float IncTempModifier = 0.07f;
         private const float DecTempModifier = 0.35f;
 
-        public EngineController( int maxSize = 10 )
+        private EngineController( int maxSize = 10 )
         {
             this._engineCollection = new EngineCollection( maxSize );
             this._vehicleSettings = new IniFile( "scripts\\EngineOverheatVehicle.ini" );

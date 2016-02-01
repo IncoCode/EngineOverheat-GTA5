@@ -10,14 +10,13 @@ namespace EngineOverheat
 {
     public class EngineOverheatTick : Script
     {
-        private readonly MySettings _settings;
+        private readonly MySettings _settings = MySettings.Instance;
         private readonly GUI _gui;
 
         public EngineOverheatTick()
         {
             this.Tick += this.EngineOverheatTick_Tick;
-            this._settings = MySettings.Instance;
-            this._gui = new GUI( this._settings );
+            this._gui = new GUI();
         }
 
         private void UpdEngine()

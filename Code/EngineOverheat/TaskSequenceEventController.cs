@@ -10,7 +10,7 @@ using GTA;
 
 namespace EngineOverheat
 {
-    public class TaskSequenceEventController
+    internal class TaskSequenceEventController
     {
         #region Fields
 

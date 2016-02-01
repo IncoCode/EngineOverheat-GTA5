@@ -8,7 +8,7 @@ using GTA;
 
 namespace EngineOverheat.Model
 {
-    public class TaskSequenceData
+    internal class TaskSequenceData
     {
         public bool IsActive;
         public Ped Ped { get; private set; }

@@ -10,18 +10,24 @@ using GTA.Native;
 
 namespace EngineOverheat
 {
-    public class MechanicController
+    internal class MechanicController
     {
+        #region Fields
+
+        public static MechanicController Instance => _instance ?? ( _instance = new MechanicController() );
+
+        #endregion
+
         private Ped _mechanicPed;
         private Vehicle _mechanicVehicle;
         private Blip _mechanicBlip;
-        private readonly TaskSequenceEventController _taskSequenceEventController;
+        private readonly TaskSequenceEventController _taskSequenceEventController = TaskSequenceEventController.Instance;
+        private static MechanicController _instance;
+
         const int CallMechanicPrice = 10000;
 
-        public MechanicController( TaskSequenceEventController taskSequenceEventController )
-        {
-            this._taskSequenceEventController = taskSequenceEventController;
-        }
+        private MechanicController()
+        { }
 
         private bool TakeMoney()
         {
