@@ -5,6 +5,8 @@
 
 This mod adds a little bit realism in GTA 5. When you push your car too hard and too fast the car engine gets overheated. When it's happened your engine starts smoking and will disabled. You should wait a some time until the engine has cooled.
 
+[Download at gta5-mods.com](https://www.gta5-mods.com/scripts/engineoverheat)
+
 Requirements 
 --------------
 
