@@ -92,8 +92,8 @@ namespace EngineOverheat
                 () =>
                 {
                     vehicleEngine.Temperature -= 0.5f;
-                    vehicleEngine.Damage -= 1.5f;
-                    vehicle.EngineHealth += 2f;
+                    vehicleEngine.Damage -= 5.5f;
+                    vehicle.EngineHealth += vehicle.EngineHealth >= 1000 ? 0 : 2f;
                 }, true );
 
             this._taskSequenceEventController.Subscribe( 8, this._mechanicPed, tasks,
