@@ -8,7 +8,7 @@ using GTA.Native;
 
 #endregion
 
-namespace EngineOverheat
+namespace EngineOverheat.Controller
 {
     internal class MechanicController
     {

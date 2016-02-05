@@ -8,7 +8,7 @@ using GTA;
 
 #endregion
 
-namespace EngineOverheat
+namespace EngineOverheat.Controller
 {
     internal class TaskSequenceEventController
     {

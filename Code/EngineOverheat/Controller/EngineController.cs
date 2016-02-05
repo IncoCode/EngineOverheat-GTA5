@@ -9,7 +9,7 @@ using Ini;
 
 #endregion
 
-namespace EngineOverheat
+namespace EngineOverheat.Controller
 {
     internal class EngineController
     {

@@ -4,12 +4,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using EngineOverheat.Model;
 using GTA;
 
 #endregion
 
-namespace EngineOverheat
+namespace EngineOverheat.Model
 {
     internal class EngineCollection : IEnumerable
     {
