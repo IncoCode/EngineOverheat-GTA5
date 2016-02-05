@@ -45,6 +45,10 @@ DecTempModifier=0,35
 
 Changelog
 --------------
+v1.1.0
+- Added "Call Mechanic" feature;
+- Added basic air cooling.
+
 v1.0.3
 - Fixed a bug related to disable gauges feature.
 
