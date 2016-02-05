@@ -18,13 +18,13 @@ namespace EngineOverheat
 
         #endregion
 
+        private static MechanicController _instance;
+
         private Ped _mechanicPed;
         private Vehicle _mechanicVehicle;
         private Blip _mechanicBlip;
         private readonly TaskSequenceEventController _taskSequenceEventController = TaskSequenceEventController.Instance;
-        private static MechanicController _instance;
-
-        const int CallMechanicPrice = 10000;
+        readonly MySettings _settings = MySettings.Instance;
 
         private MechanicController()
         {
@@ -32,12 +32,13 @@ namespace EngineOverheat
 
         private bool TakeMoney()
         {
+            int callMechanicPrice = this._settings.CallMechanicPayment;
             var playerMoney = Game.Player.Money;
-            if ( playerMoney < CallMechanicPrice )
+            if ( playerMoney < callMechanicPrice )
             {
                 return false;
             }
-            Game.Player.Money -= CallMechanicPrice;
+            Game.Player.Money -= callMechanicPrice;
             return true;
         }
 

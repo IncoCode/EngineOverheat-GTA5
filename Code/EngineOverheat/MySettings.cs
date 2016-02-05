@@ -1,5 +1,6 @@
 ﻿#region Using
 
+using System.Windows.Forms;
 using Ini;
 
 #endregion
@@ -28,6 +29,9 @@ namespace EngineOverheat
         public bool ShowEngineHealthGauge { get; private set; }
         public bool ShowTempGauge { get; private set; }
 
+        public Keys CallMechanicKey { get; private set; }
+        public int CallMechanicPayment { get; private set; }
+
         #endregion
 
         private MySettings()
@@ -50,6 +54,9 @@ namespace EngineOverheat
 
             this.ShowTempGauge = this._settings.Read( "ShowTempGauge", "GUI", true );
             this.ShowEngineHealthGauge = this._settings.Read( "ShowEngineHealthGauge", "GUI", true );
+
+            this.CallMechanicKey = Helper.StringToKey( this._settings.Read( "CallMechanicKey", "Settings", "L" ), Keys.L );
+            this.CallMechanicPayment = this._settings.Read( "CallMechanicPayment", "Settings", 10000 );
         }
     }
 }

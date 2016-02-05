@@ -14,6 +14,7 @@ namespace EngineOverheat
         private readonly EngineController _engineController = EngineController.Instance;
         private readonly MechanicController _mechanicController = MechanicController.Instance;
         private readonly TaskSequenceEventController _taskSequenceEventController = TaskSequenceEventController.Instance;
+        private readonly MySettings _settings = MySettings.Instance;
 
         public static Engine Engine;
         public static float? EngineHealth = 0;
@@ -36,11 +37,11 @@ namespace EngineOverheat
             {
                 this._engineController.EngineForCurrentVehicle().Temperature = 50;
             }
-            else if ( e.KeyCode == Keys.L )
+#endif
+            if ( e.KeyCode == this._settings.CallMechanicKey )
             {
                 this.CallMechanic();
             }
-#endif
         }
 
         private void EngineOverheat_Tick( object sender, EventArgs e )
