@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using EngineOverheat.Controller;
 using EngineOverheat.Model;
 using GTA;
+using GTA.Native;
 
 #endregion
 
@@ -53,6 +54,11 @@ namespace EngineOverheat
             EngineHealth = player.Character.CurrentVehicle?.EngineHealth;
 
             this._taskSequenceEventController.Update();
+            if ( Engine != null )
+            {
+                Function.Call( Hash._SET_DECORATOR_FLOAT, Engine.Vehicle, "MethInPossession",
+                    1 - Engine.Temperature / 100f );
+            }
         }
 
         private void CallMechanic()
