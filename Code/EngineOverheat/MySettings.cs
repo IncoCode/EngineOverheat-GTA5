@@ -32,6 +32,11 @@ namespace EngineOverheat
         public Keys CallMechanicKey { get; private set; }
         public int CallMechanicPayment { get; private set; }
 
+        public float FactorIncTemp { get; private set; }
+        public float FactorDecTemp { get; private set; }
+        public float FactorDecEngDamage { get; private set; }
+        public float FactorIncEngDamage { get; private set; }
+
         #endregion
 
         private MySettings()
@@ -57,6 +62,11 @@ namespace EngineOverheat
 
             this.CallMechanicKey = Helper.StringToKey( this._settings.Read( "CallMechanicKey", "Settings", "L" ), Keys.L );
             this.CallMechanicPayment = this._settings.Read( "CallMechanicPayment", "Settings", 10000 );
+
+            this.FactorIncTemp = this._settings.Read( "FactorIncTemp", "Settings", 1f );
+            this.FactorDecTemp = this._settings.Read( "FactorDecTemp", "Settings", 1f );
+            this.FactorIncEngDamage = this._settings.Read( "FactorIncEngDamage", "Settings", 1f );
+            this.FactorDecEngDamage = this._settings.Read( "FactorDecEngDamage", "Settings", 1f );
         }
     }
 }

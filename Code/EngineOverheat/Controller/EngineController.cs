@@ -22,6 +22,8 @@ namespace EngineOverheat.Controller
         private readonly EngineCollection _engineCollection;
         private readonly IniFile _vehicleSettings;
         private readonly Dictionary<string, VehicleSetting> _vehicleModifiers;
+        private readonly MySettings _settings = MySettings.Instance;
+
         private static EngineController _instance;
 
         private const float IncTempModifier = 0.07f;
@@ -69,13 +71,14 @@ namespace EngineOverheat.Controller
 
                 if ( veh.EngineRunning )
                 {
-                    float val = incTempMod * acceleration;
+                    float val = incTempMod * acceleration * this._settings.FactorIncTemp;
                     engine.Temperature += val == 0 ? 0.0006f : val;
                 }
 
                 if ( engine.Temperature > 30 || !veh.EngineRunning )
                 {
-                    float decreaseTempValue = 0.025f * ( decTempMod + ( !veh.EngineRunning ? 1.35f : 0 ) );
+                    float decreaseTempValue = 0.025f * ( decTempMod + ( !veh.EngineRunning ? 1.35f : 0 ) )
+                                              * this._settings.FactorDecTemp;
                     if ( veh.Speed > 40 )
                     {
                         decreaseTempValue += ( veh.Speed - 40 ) / 1000;
@@ -90,7 +93,7 @@ namespace EngineOverheat.Controller
                 if ( engine.Damage > 0 || veh.EngineHealth < 1000 )
                 {
                     float val = ( ( veh.EngineRunning ? engine.Temperature : 30 ) / 100 + acceleration ) *
-                                ( 0.25f + ( engine.Broken ? 1.20f : 0 ) );
+                                ( 0.25f + ( engine.Broken ? 1.20f : 0 ) ) * this._settings.FactorDecEngDamage;
                     engine.Damage -= val;
                     if ( veh.EngineHealth < 1000 )
                     {
@@ -105,7 +108,8 @@ namespace EngineOverheat.Controller
                 {
                     if ( !engine.Broken && veh.EngineHealth > 0f )
                     {
-                        float val = ( engine.Temperature / 100 + acceleration ) * 0.5f;
+                        float val = ( engine.Temperature / 100 + acceleration ) * 0.5f *
+                                    this._settings.FactorIncEngDamage;
                         veh.EngineHealth -= val;
                         engine.Damage += val;
                     }
