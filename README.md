@@ -45,6 +45,10 @@ DecTempModifier=0,35
 
 Changelog
 --------------
+v1.1.2:
+- Added some factors that can be changed in .ini-file;
+- Small fixes.
+
 v1.1.1:
 - Added support for "LeFix Speedometer" (the engine icon (on fuel UI) is light up when engine starts to suffer).
 
