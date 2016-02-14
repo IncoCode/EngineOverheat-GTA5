@@ -24,7 +24,8 @@ namespace EngineOverheat.Controller
         private Vehicle _mechanicVehicle;
         private Blip _mechanicBlip;
         private readonly TaskSequenceEventController _taskSequenceEventController = TaskSequenceEventController.Instance;
-        readonly MySettings _settings = MySettings.Instance;
+        private readonly MySettings _settings = MySettings.Instance;
+        private bool _isCalled;
 
         private MechanicController()
         {
@@ -44,6 +45,11 @@ namespace EngineOverheat.Controller
 
         public void CallMechanic( Vehicle vehicle, Engine vehicleEngine )
         {
+            if ( this._isCalled )
+            {
+                UI.Notify( "Mechanic is already called!", true );
+                return;
+            }
             if ( Math.Round( vehicle.Speed, 2 ) > 0 )
             {
                 UI.Notify( "You should stop your car before calling the mechanic!", true );
@@ -112,6 +118,7 @@ namespace EngineOverheat.Controller
                     this._mechanicVehicle.MarkAsNoLongerNeeded();
                     this._mechanicVehicle.LeftIndicatorLightOn = false;
                     this._mechanicVehicle.RightIndicatorLightOn = false;
+                    this._isCalled = false;
                 }
                 );
 
@@ -119,6 +126,7 @@ namespace EngineOverheat.Controller
             this._mechanicBlip = this._mechanicPed.AddBlip();
             this._mechanicBlip.Color = BlipColor.Blue;
             this._mechanicBlip.Name = "Mechanic";
+            this._isCalled = true;
         }
 
         private void OpenVehicleHood( Vehicle vehicle, bool state = true )
