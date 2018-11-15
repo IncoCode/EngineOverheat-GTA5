@@ -93,48 +93,48 @@ namespace EngineOverheat.Controller
 
             var tasks = new TaskSequence();
             tasks.AddTask.DriveTo( this._mechanicVehicle, vehiclePosition, 15f, 40, (int)DrivingStyle.Rushed );
-            tasks.AddTask.RunTo( openHoodPosition );
-            tasks.AddTask.TurnTo( vehicle, 1000 );
-            tasks.AddTask.Wait( 1000 );
-            tasks.AddTask.GoTo( shootPosition );
-            tasks.AddTask.ShootAt( vehiclePosition, 15500, FiringPattern.FullAuto );
-            tasks.AddTask.GoTo( openHoodPosition );
-            tasks.AddTask.TurnTo( vehicle, 1000 );
-            tasks.AddTask.Wait( 1000 );
-            tasks.AddTask.CruiseWithVehicle( this._mechanicVehicle, 30f, (int)DrivingStyle.Rushed );
+            tasks.AddTask.RunTo(openHoodPosition);
+            tasks.AddTask.TurnTo(vehicle, 1000);
+            tasks.AddTask.Wait(1000);
+            tasks.AddTask.GoTo(shootPosition);
+            tasks.AddTask.ShootAt(vehiclePosition, 15500, FiringPattern.FullAuto);
+            tasks.AddTask.GoTo(openHoodPosition);
+            tasks.AddTask.TurnTo(vehicle, 1000);
+            tasks.AddTask.Wait(1000);
+            tasks.AddTask.CruiseWithVehicle(this._mechanicVehicle, 30f, (int)DrivingStyle.Rushed);
             tasks.Close();
 
-            this._taskSequenceEventController.Subscribe( 2, this._mechanicPed, tasks,
+            this._taskSequenceEventController.Subscribe(2, this._mechanicPed, tasks,
                 () =>
                 {
                     this._mechanicVehicle.LeftIndicatorLightOn = true;
                     this._mechanicVehicle.RightIndicatorLightOn = true;
-                } );
+                });
 
-            this._taskSequenceEventController.Subscribe( 4, this._mechanicPed, tasks,
-                () => OpenVehicleHood( vehicle ) );
+            this._taskSequenceEventController.Subscribe(4, this._mechanicPed, tasks,
+                () => OpenVehicleHood(vehicle));
 
-            this._taskSequenceEventController.Subscribe( 5, this._mechanicPed, tasks,
+            this._taskSequenceEventController.Subscribe(5, this._mechanicPed, tasks,
                 () =>
                 {
                     this._isPossibleToCancelCall = false;
                     vehicleEngine.Temperature -= 0.5f;
                     vehicleEngine.Damage -= 5.5f;
                     vehicle.EngineHealth += vehicle.EngineHealth >= 1000 ? 0 : 2f;
-                }, true );
+                }, true);
 
-            this._taskSequenceEventController.Subscribe( 8, this._mechanicPed, tasks,
-                () => OpenVehicleHood( vehicle, false ) );
+            this._taskSequenceEventController.Subscribe(8, this._mechanicPed, tasks,
+                () => OpenVehicleHood(vehicle, false));
 
-            this._taskSequenceEventController.Subscribe( 9, this._mechanicPed, tasks,
+            this._taskSequenceEventController.Subscribe(9, this._mechanicPed, tasks,
                 () =>
                 {
                     this._mechanicPed.MarkAsNoLongerNeeded();
-                    this._mechanicPed.Task.CruiseWithVehicle( this._mechanicVehicle, 30f,
-                        (int)DrivingStyle.AvoidTrafficExtremely );
+                    this._mechanicPed.Task.CruiseWithVehicle(this._mechanicVehicle, 30f,
+                        (int)DrivingStyle.AvoidTrafficExtremely);
                     vehicle.IsDriveable = true;
                     this._mechanicBlip.Remove();
-                    this._taskSequenceEventController.UnsubscribeAll( this._mechanicPed, tasks );
+                    this._taskSequenceEventController.UnsubscribeAll(this._mechanicPed, tasks);
                     this._mechanicVehicle.MarkAsNoLongerNeeded();
                     this._mechanicVehicle.LeftIndicatorLightOn = false;
                     this._mechanicVehicle.RightIndicatorLightOn = false;

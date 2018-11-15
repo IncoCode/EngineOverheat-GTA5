@@ -33,7 +33,8 @@ namespace EngineOverheat
 #if DEBUG
             if ( e.KeyCode == Keys.I )
             {
-                this._engineController.EngineForCurrentVehicle().Temperature = 100;
+                //this._engineController.EngineForCurrentVehicle().Temperature = 100;
+                this._mechanicController._mechanicPed.Kill();
             }
             else if ( e.KeyCode == Keys.K )
             {
