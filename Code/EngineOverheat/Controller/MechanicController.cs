@@ -21,7 +21,7 @@ namespace EngineOverheat.Controller
 
         private static MechanicController _instance;
 
-        private Ped _mechanicPed;
+        public Ped _mechanicPed;
         private Vehicle _mechanicVehicle;
         private Blip _mechanicBlip;
         private readonly TaskSequenceEventController _taskSequenceEventController = TaskSequenceEventController.Instance;
@@ -160,7 +160,6 @@ namespace EngineOverheat.Controller
 
             UI.Notify("Something bad happened to the mechanic. Please try again.");
             this._isCalled = false;
-            this._vehiclesWaitingForMechanic.Remove(vehicle);
         }
 
         public void Tick()
@@ -170,11 +169,13 @@ namespace EngineOverheat.Controller
                 return;
             }
 
-            foreach (Vehicle vehicle in this._vehiclesWaitingForMechanic)
+            for (int i = this._vehiclesWaitingForMechanic.Count - 1; i >= 0; i--)
             {
+                Vehicle vehicle = this._vehiclesWaitingForMechanic[i];
                 if (!this._mechanicPed.IsAlive)
                 {
                     this.UncallMechanic(vehicle);
+                    this._vehiclesWaitingForMechanic.RemoveAt(i);
                 }
             }
         }
