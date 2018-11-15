@@ -50,6 +50,7 @@ namespace EngineOverheat
         {
             Player player = Game.Player;
             this._engineController.Tick();
+            this._mechanicController.Tick();
             Engine = this._engineController.EngineForCurrentVehicle();
             EngineHealth = player.Character.CurrentVehicle?.EngineHealth;
 

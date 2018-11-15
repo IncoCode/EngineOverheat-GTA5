@@ -1,6 +1,7 @@
 ﻿#region Using
 
 using System;
+using System.Collections.Generic;
 using EngineOverheat.Model;
 using GTA;
 using GTA.Math;
@@ -26,9 +27,11 @@ namespace EngineOverheat.Controller
         private readonly TaskSequenceEventController _taskSequenceEventController = TaskSequenceEventController.Instance;
         private readonly MySettings _settings = MySettings.Instance;
         private bool _isCalled;
+        private List<Vehicle> _vehiclesWaitingForMechanic;
 
         private MechanicController()
         {
+            this._vehiclesWaitingForMechanic = new List<Vehicle>();
         }
 
         private bool TakeMoney()
@@ -93,7 +96,7 @@ namespace EngineOverheat.Controller
                 } );
 
             this._taskSequenceEventController.Subscribe( 4, this._mechanicPed, tasks,
-                () => this.OpenVehicleHood( vehicle ) );
+                () => OpenVehicleHood( vehicle ) );
 
             this._taskSequenceEventController.Subscribe( 5, this._mechanicPed, tasks,
                 () =>
@@ -104,7 +107,7 @@ namespace EngineOverheat.Controller
                 }, true );
 
             this._taskSequenceEventController.Subscribe( 8, this._mechanicPed, tasks,
-                () => this.OpenVehicleHood( vehicle, false ) );
+                () => OpenVehicleHood( vehicle, false ) );
 
             this._taskSequenceEventController.Subscribe( 9, this._mechanicPed, tasks,
                 () =>
@@ -127,9 +130,10 @@ namespace EngineOverheat.Controller
             this._mechanicBlip.Color = BlipColor.Blue;
             this._mechanicBlip.Name = "Mechanic";
             this._isCalled = true;
+            this._vehiclesWaitingForMechanic.Add(vehicle);
         }
 
-        private void OpenVehicleHood( Vehicle vehicle, bool state = true )
+        private static void OpenVehicleHood( Vehicle vehicle, bool state = true )
         {
             if ( state )
             {
@@ -138,6 +142,40 @@ namespace EngineOverheat.Controller
             else
             {
                 vehicle.CloseDoor( VehicleDoor.Hood, false );
+            }
+        }
+
+        private void UncallMechanic(Vehicle vehicle)
+        {
+            this._mechanicPed.MarkAsNoLongerNeeded();
+            this._mechanicPed.Task.ClearAllImmediately();
+            this._mechanicVehicle.MarkAsNoLongerNeeded();
+            this._mechanicBlip.Remove();
+
+            this._mechanicVehicle.LeftIndicatorLightOn = false;
+            this._mechanicVehicle.RightIndicatorLightOn = false;
+
+            vehicle.IsDriveable = true;
+            OpenVehicleHood(vehicle, false);
+
+            UI.Notify("Something bad happened to the mechanic. Please try again.");
+            this._isCalled = false;
+            this._vehiclesWaitingForMechanic.Remove(vehicle);
+        }
+
+        public void Tick()
+        {
+            if (!this._isCalled)
+            {
+                return;
+            }
+
+            foreach (Vehicle vehicle in this._vehiclesWaitingForMechanic)
+            {
+                if (!this._mechanicPed.IsAlive)
+                {
+                    this.UncallMechanic(vehicle);
+                }
             }
         }
     }
