@@ -13,7 +13,7 @@ Requirements
 - [Microsoft .NET Framework ≥ 4.5.2](https://www.microsoft.com/download/details.aspx?id=30653);
 - [Microsoft Visual C++ Redistributable for Visual Studio 2015  (x64)](https://www.microsoft.com/download/details.aspx?id=48145);
 - [Script Hook V](http://gtaforums.com/topic/788343-script-hook-v/);
-- [Community Script Hook V .NET ≥ v2.5.1](https://github.com/crosire/scripthookvdotnet/releases/tag/v2.5.1).
+- [Community Script Hook V .NET ≥ v2.10.8](https://github.com/crosire/scripthookvdotnet/releases/tag/v2.10.8).
 
 How to install
 --------------
@@ -34,7 +34,7 @@ DecTempModifier=0,30
 ```
 <img src="img/user_modifiers.png">
 
-The list of vehicle hash can be found [here](https://github.com/crosire/scripthookvdotnet/blob/dev/source/VehicleHashes.hpp#L7).
+The list of vehicle hash can be found [here](https://github.com/crosire/scripthookvdotnet/blob/v2.10.8/source/scripting/VehicleHashes.hpp#L7).
 
 Default overheat modifiers
 --------------------------
@@ -45,6 +45,9 @@ DecTempModifier=0,35
 
 Changelog
 --------------
+v1.1.3:
+- Added ability to cancel call for Mechanic. Just press the same button.
+
 v1.1.2:
 - Added some factors that can be changed in .ini-file;
 - Small fixes.
