@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using EngineOverheat.Model;
 using GTA;
 using GTA.Math;
@@ -27,11 +28,13 @@ namespace EngineOverheat.Controller
         private readonly TaskSequenceEventController _taskSequenceEventController = TaskSequenceEventController.Instance;
         private readonly MySettings _settings = MySettings.Instance;
         private bool _isCalled;
+        private bool _isPossibleToCancelCall;
         private List<Vehicle> _vehiclesWaitingForMechanic;
 
         private MechanicController()
         {
             this._vehiclesWaitingForMechanic = new List<Vehicle>();
+            this._isPossibleToCancelCall = false;
         }
 
         private bool TakeMoney()
@@ -46,11 +49,24 @@ namespace EngineOverheat.Controller
             return true;
         }
 
+        private void CancelMechanicCall( Vehicle vehicle )
+        {
+            if (!this._isPossibleToCancelCall)
+            {
+                UI.Notify("Mechanic is already called!", true);
+                return;
+            }
+            this._isPossibleToCancelCall = false;
+            this.UncallMechanic(vehicle);
+            Game.Player.Money += this._settings.CallMechanicPayment;
+            UI.Notify("Call for Mechanic is cancelled.");
+        }
+
         public void CallMechanic( Vehicle vehicle, Engine vehicleEngine )
         {
             if ( this._isCalled )
             {
-                UI.Notify( "Mechanic is already called!", true );
+                this.CancelMechanicCall(vehicle);
                 return;
             }
             if ( Math.Round( vehicle.Speed, 2 ) > 0 )
@@ -101,6 +117,7 @@ namespace EngineOverheat.Controller
             this._taskSequenceEventController.Subscribe( 5, this._mechanicPed, tasks,
                 () =>
                 {
+                    this._isPossibleToCancelCall = false;
                     vehicleEngine.Temperature -= 0.5f;
                     vehicleEngine.Damage -= 5.5f;
                     vehicle.EngineHealth += vehicle.EngineHealth >= 1000 ? 0 : 2f;
@@ -130,6 +147,7 @@ namespace EngineOverheat.Controller
             this._mechanicBlip.Color = BlipColor.Blue;
             this._mechanicBlip.Name = "Mechanic";
             this._isCalled = true;
+            this._isPossibleToCancelCall = true;
             this._vehiclesWaitingForMechanic.Add(vehicle);
         }
 
@@ -158,7 +176,7 @@ namespace EngineOverheat.Controller
             vehicle.IsDriveable = true;
             OpenVehicleHood(vehicle, false);
 
-            UI.Notify("Something bad happened to the mechanic. Please try again.");
+            this._vehiclesWaitingForMechanic.Remove(vehicle);
             this._isCalled = false;
         }
 
@@ -169,13 +187,12 @@ namespace EngineOverheat.Controller
                 return;
             }
 
-            for (int i = this._vehiclesWaitingForMechanic.Count - 1; i >= 0; i--)
+            foreach (Vehicle vehicle in this._vehiclesWaitingForMechanic.ToList())
             {
-                Vehicle vehicle = this._vehiclesWaitingForMechanic[i];
                 if (!this._mechanicPed.IsAlive)
                 {
                     this.UncallMechanic(vehicle);
-                    this._vehiclesWaitingForMechanic.RemoveAt(i);
+                    UI.Notify("Something bad happened to the mechanic. Please try again.");
                 }
             }
         }
