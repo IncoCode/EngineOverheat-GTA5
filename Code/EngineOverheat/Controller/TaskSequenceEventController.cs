@@ -21,10 +21,17 @@ namespace EngineOverheat.Controller
 
         private readonly List<TaskSequenceData> _taskSequencesData;
         private static TaskSequenceEventController _instance;
+        private bool _isDisposing = false;
 
         private TaskSequenceEventController()
         {
             this._taskSequencesData = new List<TaskSequenceData>();
+        }
+
+        public void Dispose()
+        {
+            this._isDisposing = true;
+            this._taskSequencesData.Clear();
         }
 
         private TaskSequenceData GetTaskSequenceData( Ped ped, TaskSequence taskSequence )
@@ -65,6 +72,11 @@ namespace EngineOverheat.Controller
 
         public void Update()
         {
+            if (this._isDisposing)
+            {
+                return;
+            }
+
             this._taskSequencesData.ForEach( taskSequence => taskSequence.Update() );
         }
     }

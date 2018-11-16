@@ -34,6 +34,7 @@ namespace EngineOverheat
             {
                 this._engineController.Dispose();
                 this._mechanicController.Dispose();
+                this._taskSequenceEventController.Dispose();
             }
         }
 
