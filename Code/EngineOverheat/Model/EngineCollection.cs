@@ -12,7 +12,7 @@ namespace EngineOverheat.Model
 {
     internal class EngineCollection : IEnumerable
     {
-        private Dictionary<int, EngineData> _vehicles;
+        private Dictionary<int, EngineData> _vehicles; // key - vehicle handle
         private readonly int _maxSize;
 
         public EngineCollection( int maxSize = 10 )
@@ -41,6 +41,7 @@ namespace EngineOverheat.Model
             {
                 return null;
             }
+
             EngineData engineData;
             if ( this._vehicles.ContainsKey( vehicle.Handle ) )
             {
@@ -61,11 +62,21 @@ namespace EngineOverheat.Model
             return engineData.Engine;
         }
 
+        public void Clear()
+        {
+            this._vehicles.Clear();
+        }
+
         #region Members
 
         public IEnumerator GetEnumerator()
         {
             return this._vehicles.GetEnumerator();
+        }
+
+        internal IEnumerable<KeyValuePair<int, EngineData>> ToList()
+        {
+            return this._vehicles.ToList();
         }
 
         #endregion

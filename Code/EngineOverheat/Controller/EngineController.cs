@@ -23,6 +23,7 @@ namespace EngineOverheat.Controller
         private readonly IniFile _vehicleSettings;
         private readonly Dictionary<string, VehicleSetting> _vehicleModifiers;
         private readonly MySettings _settings = MySettings.Instance;
+        private bool _isDisposing = false;
 
         private static EngineController _instance;
 
@@ -34,6 +35,12 @@ namespace EngineOverheat.Controller
             this._engineCollection = new EngineCollection( maxSize );
             this._vehicleSettings = new IniFile( "scripts\\EngineOverheatVehicle.ini" );
             this._vehicleModifiers = new Dictionary<string, VehicleSetting>();
+        }
+
+        public void Dispose()
+        {
+            this._isDisposing = true;
+            this._engineCollection.Clear();
         }
 
         public Engine EngineForCurrentVehicle()
@@ -56,11 +63,14 @@ namespace EngineOverheat.Controller
 
         public void Tick()
         {
+            if (this._isDisposing)
+            {
+                return;
+            }
+
             var player = Game.Player;
 
-            this._engineCollection.GetEngine( player.Character.CurrentVehicle );
-
-            foreach ( KeyValuePair<int, EngineData> kvp in this._engineCollection )
+            foreach ( KeyValuePair<int, EngineData> kvp in this._engineCollection.ToList() )
             {
                 var veh = new Vehicle( kvp.Key );
                 Engine engine = kvp.Value.Engine;
@@ -118,6 +128,11 @@ namespace EngineOverheat.Controller
                         veh.EngineHealth = -1;
                         engine.Broken = true;
                     }
+                }
+
+                if (this._isDisposing)
+                {
+                    return;
                 }
             }
 

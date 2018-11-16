@@ -30,11 +30,22 @@ namespace EngineOverheat.Controller
         private bool _isCalled;
         private bool _isPossibleToCancelCall;
         private List<Vehicle> _vehiclesWaitingForMechanic;
+        private bool _isDisposing = false;
 
         private MechanicController()
         {
             this._vehiclesWaitingForMechanic = new List<Vehicle>();
             this._isPossibleToCancelCall = false;
+        }
+
+        public void Dispose()
+        {
+            this._isDisposing = true;
+
+            foreach (Vehicle vehicle in this._vehiclesWaitingForMechanic.ToList())
+            {
+                this.UncallMechanic(vehicle);
+            }
         }
 
         private bool TakeMoney()
@@ -69,11 +80,13 @@ namespace EngineOverheat.Controller
                 this.CancelMechanicCall(vehicle);
                 return;
             }
+
             if ( Math.Round( vehicle.Speed, 2 ) > 0 )
             {
                 UI.Notify( "You should stop your car before calling the mechanic!", true );
                 return;
             }
+
             if ( !this.TakeMoney() )
             {
                 UI.Notify( "Not enought money!", true );
@@ -182,13 +195,18 @@ namespace EngineOverheat.Controller
 
         public void Tick()
         {
-            if (!this._isCalled)
+            if (!this._isCalled || this._isDisposing)
             {
                 return;
             }
 
             foreach (Vehicle vehicle in this._vehiclesWaitingForMechanic.ToList())
             {
+                if (this._isDisposing)
+                {
+                    return;
+                }
+
                 if (!this._mechanicPed.IsAlive)
                 {
                     this.UncallMechanic(vehicle);

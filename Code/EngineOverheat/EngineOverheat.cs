@@ -28,6 +28,15 @@ namespace EngineOverheat
             this.KeyDown += this.EngineOverheat_KeyDown;
         }
 
+        protected override void Dispose(bool A_0)
+        {
+            if (A_0)
+            {
+                this._engineController.Dispose();
+                this._mechanicController.Dispose();
+            }
+        }
+
         private void EngineOverheat_KeyDown( object sender, KeyEventArgs e )
         {
 #if DEBUG
