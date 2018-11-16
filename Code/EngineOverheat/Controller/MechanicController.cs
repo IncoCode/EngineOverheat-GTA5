@@ -29,7 +29,7 @@ namespace EngineOverheat.Controller
         private readonly MySettings _settings = MySettings.Instance;
         private bool _isCalled;
         private bool _isPossibleToCancelCall;
-        private List<Vehicle> _vehiclesWaitingForMechanic;
+        private readonly List<Vehicle> _vehiclesWaitingForMechanic;
         private bool _isDisposing = false;
 
         private MechanicController()
@@ -180,11 +180,13 @@ namespace EngineOverheat.Controller
         {
             this._mechanicPed.MarkAsNoLongerNeeded();
             this._mechanicPed.Task.ClearAllImmediately();
-            this._mechanicVehicle.MarkAsNoLongerNeeded();
-            this._mechanicBlip.Remove();
+            this._taskSequenceEventController.UnsubscribeAll(this._mechanicPed);
 
+            this._mechanicVehicle.MarkAsNoLongerNeeded();
             this._mechanicVehicle.LeftIndicatorLightOn = false;
             this._mechanicVehicle.RightIndicatorLightOn = false;
+
+            this._mechanicBlip.Remove();
 
             vehicle.IsDriveable = true;
             OpenVehicleHood(vehicle, false);

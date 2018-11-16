@@ -70,6 +70,11 @@ namespace EngineOverheat.Controller
             this._taskSequencesData.Remove( taskSequenceData );
         }
 
+        public void UnsubscribeAll(Ped ped)
+        {
+            this._taskSequencesData.RemoveAll(tsd => tsd.Ped == ped);
+        }
+
         public void Update()
         {
             if (this._isDisposing)
