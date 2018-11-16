@@ -46,7 +46,8 @@ DecTempModifier=0,35
 Changelog
 --------------
 v1.1.3:
-- Added ability to cancel call for Mechanic. Just press the same button.
+- Added ability to cancel call for Mechanic. Just press the same button;
+- Small fixes.
 
 v1.1.2:
 - Added some factors that can be changed in .ini-file;
