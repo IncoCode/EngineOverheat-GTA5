@@ -89,7 +89,7 @@
   <PropertyGroup>
     <PostBuildEvent>set isAppVeyor=APPVEYOR
 
-IF NOT "%25isAppVeyor%25" == "true" (
+IF NOT "%25isAppVeyor%25" == "True" (
     xcopy "$(ProjectDir)$(OutDir)*.dll" "g:\GAMES\steamapps\common\Grand Theft Auto V\scripts\" /CY
     xcopy "$(ProjectDir)$(OutDir)*.pdb" "g:\GAMES\steamapps\common\Grand Theft Auto V\scripts\" /CY
 )</PostBuildEvent>
