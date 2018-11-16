@@ -87,7 +87,7 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>set isAppVeyor=APPVEYOR
+    <PostBuildEvent>SET isAppVeyor=%25APPVEYOR%25
 
 IF NOT "%25isAppVeyor%25" == "True" (
     xcopy "$(ProjectDir)$(OutDir)*.dll" "g:\GAMES\steamapps\common\Grand Theft Auto V\scripts\" /CY
